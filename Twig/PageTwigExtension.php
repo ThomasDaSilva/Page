@@ -17,6 +17,7 @@ use Page\Model\PageI18nQuery;
 use Page\Model\PageQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Thelia\Service\Model\LangService;
 use TheliaBlocks\Service\JsonBlockService;
 use TheliaLibrary\Model\LibraryItemImageQuery;
 use TheliaLibrary\Service\LibraryImageService;
@@ -31,6 +32,7 @@ class PageTwigExtension extends AbstractExtension
         private LibraryImageService $libraryImageService,
         private LibraryImage $theliaLibraryTwigImage,
         protected RequestStack $requestStack,
+        private LangService $localeService,
     ) {}
 
     public function getFunctions(): array
@@ -48,6 +50,8 @@ class PageTwigExtension extends AbstractExtension
 
     public function getPageList(?array $params = [])
     {
+        $currentLocale = $this->localeService->getLocale();
+
         $query = PageQuery::create();
 
         if (array_key_exists('parent_tree_level', $params)) {
@@ -71,7 +75,9 @@ class PageTwigExtension extends AbstractExtension
                 ->endUse();
         }
 
-        $pages = $query->filterByVisible(1);
+        $pages = $query
+            ->filterByVisible(1)
+            ->filterByIsHome(0);
 
         $results = [];
 
@@ -83,7 +89,7 @@ class PageTwigExtension extends AbstractExtension
                 'CODE' => $page->getCode(),
                 'ID' => $page->getId(),
                 'TITLE' =>  $imageTitle->getTitle(),
-                'URL' => $page->getUrl(),
+                'URL' => $page->getUrl($currentLocale),
             ];
         }
 
