@@ -23,7 +23,7 @@ use Thelia\Form\Exception\FormValidationException;
 class PageTypeController extends BaseAdminController
 {
     /**
-     * @Route("/", name="_page_type_list", methods="GET")
+     * @Route("", name="_page_type_list", methods="GET")
      */
     public function listPageTypeAction()
     {
