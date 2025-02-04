@@ -21,26 +21,19 @@ class PageService
 
     public function __construct(protected ParserResolver $parserResolver, protected TemplateHelperInterface $templateHelper) {}
 
-    public function getPageTemplateName(PageModel $page, bool $readCode = true)
+    public function getPageTemplateName(PageModel $page)
     {
 
-        if ($page->isHome()) {
-            $templateName = 'page-home';
-        } else if ($readCode) {
-            $templateName = 'page-' . $page->getCode();
-        } else if ($page->getPageType()) {
-            $templateName = 'page-' . $page->getPageType()->getType();
+        if ($page->isHome() && $this->templateExist('page-home')) {
+            return 'page-home';
+        } 
+
+        if ($page->getCode() && $this->templateExist('page-' . $page->getCode())) {
+            return  'page-' . $page->getCode();
         }
-
-        if ($templateName) {
-            $path = $this->templateHelper->getActiveFrontTemplate()->getAbsolutePath();
-            $this->parser = $this->parserResolver->getParser($path, $templateName);
-
-            $filePath = $path . DS . $templateName . '.' . $this->parser->getFileExtension();
-
-            if (file_exists($filePath)) {
-                return $templateName;
-            }
+        
+        if ($page->getPageType() && $this->templateExist('page-' . $page->getPageType()->getType())) {
+            return 'page-' . $page->getPageType()->getType();
         }
 
         $parent = $page->getParent();
@@ -129,5 +122,16 @@ class PageService
                     break;
             }
         }
+    }
+
+
+
+    public function templateExist(string $templateName) : bool {
+        $path = $this->templateHelper->getActiveFrontTemplate()->getAbsolutePath();
+        $this->parser = $this->parserResolver->getParser($path, $templateName);
+
+        $filePath = $path . DS . $templateName . '.' . $this->parser->getFileExtension();
+
+        return file_exists($filePath);
     }
 }
