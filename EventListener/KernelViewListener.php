@@ -127,8 +127,8 @@ class KernelViewListener implements EventSubscriberInterface
             ->findOne();
         }
 
-        if (!$page) {
-            return;
+        if (!$page || !$page->getVisible()) {
+            throw new NotFoundHttpException();
         }
 
         self::$page = $page;
