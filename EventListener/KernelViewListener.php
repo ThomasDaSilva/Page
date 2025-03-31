@@ -30,6 +30,7 @@ use Thelia\Model\Tools\ModelCriteriaTools;
 use TheliaBlocks\Model\Map\BlockGroupI18nTableMap;
 use TheliaBlocks\Model\Map\ItemBlockGroupTableMap;
 use TheliaBlocks\Service\JsonBlockService;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class KernelViewListener implements EventSubscriberInterface
 {
