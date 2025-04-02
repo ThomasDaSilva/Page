@@ -66,6 +66,9 @@ class PageTwigExtension extends AbstractExtension
         if (array_key_exists('exclude_id', $params)) {
             $query->filterById($params['exclude_id'], Criteria::NOT_IN);
         }
+        if (array_key_exists('exclude_code', $params)) {
+            $query->filterByCode($params['exclude_code'], Criteria::NOT_IN);
+        }
         if (array_key_exists('tag', $params)) {
             $query
                 ->usePageTagCombinationQuery()
