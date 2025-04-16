@@ -21,7 +21,6 @@ use Thelia\Service\Model\LangService;
 use TheliaBlocks\Service\JsonBlockService;
 use TheliaLibrary\Model\LibraryItemImageQuery;
 use TheliaLibrary\Service\LibraryImageService;
-use TheliaLibrary\Twig\LibraryImage;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -30,7 +29,6 @@ class PageTwigExtension extends AbstractExtension
     public function __construct(
         private JsonBlockService $jsonBlockService,
         private LibraryImageService $libraryImageService,
-        private LibraryImage $theliaLibraryTwigImage,
         protected RequestStack $requestStack,
         private LangService $localeService,
     ) {}
