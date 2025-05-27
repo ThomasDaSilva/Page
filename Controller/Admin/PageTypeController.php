@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Thelia package.
+ * http://www.thelia.net
+ *
+ * (c) OpenStudio <info@thelia.net>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Page\Controller\Admin;
 
 use Page\Form\PageForm;
@@ -11,7 +21,7 @@ use Thelia\Core\Template\ParserContext;
 use Thelia\Form\Exception\FormValidationException;
 
 /**
- * Class PageController
+ * Class PageController.
  *
  * @author Damien Foulhoux <dfoulhoux@openstudio.fr>
  * @author Bertrand Tourlonias <btourlonias@openstudio.fr>
@@ -27,7 +37,7 @@ class PageTypeController extends BaseAdminController
      */
     public function listPageTypeAction()
     {
-        return $this->render('page-type.html');
+        return $this->render('page-type');
     }
 
     /**
@@ -62,9 +72,6 @@ class PageTypeController extends BaseAdminController
     /**
      * @Route("/update", name="_update_page_type_list", methods="POST")
      *
-     * @param ParserContext $parserContext
-     * @param PageTypeProvider $pageTypeProvider
-     * @param int $pagesTypeId
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response|null
      */
     public function updatePagesTypeAction(ParserContext $parserContext, PageTypeProvider $pageTypeProvider, int $pagesTypeId)
@@ -97,18 +104,16 @@ class PageTypeController extends BaseAdminController
     /**
      * @Route("/delete", name="_update_page_type_list", methods="GET")
      *
-     * @param PageTypeProvider $pageTypeProvider
-     * @param $pagesTypeId
      * @return string|null
      */
     public function deletePagesTypeAction(PageTypeProvider $pageTypeProvider, $pagesTypeId)
     {
         try {
             $pageTypeProvider->deletePageType($pagesTypeId);
-
         } catch (\Exception $e) {
             $error_message = $e->getMessage();
-            return $this->generateRedirect('admin/page?error=' . $error_message);
+
+            return $this->generateRedirect('admin/page?error='.$error_message);
         }
 
         return $this->generateRedirect('admin/page-type');
