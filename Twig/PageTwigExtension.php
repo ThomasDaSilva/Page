@@ -91,6 +91,9 @@ class PageTwigExtension extends AbstractExtension
                 'ID' => $page->getId(),
                 'TITLE' =>  $imageTitle->getTitle(),
                 'URL' => $page->getUrl($currentLocale),
+                'DESCRIPTION' => $imageTitle->getDescription(),
+                'POSTSCRIPTUM' => $imageTitle->getPostscriptum(),
+                'CHAPO' => $imageTitle->getChapo(),
             ];
         }
 
