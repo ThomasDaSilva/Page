@@ -138,7 +138,9 @@ class KernelViewListener implements EventSubscriberInterface
         $this->parser = $this->parserResolver->getParser($path, $view);
         // Define the template that should be used
         $this->parser->setTemplateDefinition(
-            $this->parser->getTemplateDefinition() ?: $this->templateHelper->getActiveFrontTemplate()
+            $this->parser->hasTemplateDefinition()
+                ? $this->parser->getTemplateDefinition()
+                : $this->templateHelper->getActiveFrontTemplate()
         );
 
         $currentTemplateDefinition = $this->parser->getTemplateDefinition();
