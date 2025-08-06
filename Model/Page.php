@@ -46,7 +46,7 @@ class Page extends BasePage
 
         return $this->makeRoot();
     }
-    protected function createSlug()
+    protected function createSlug(): string
     {
         // create the slug based on the `slug_pattern` and the object properties
         $slug = $this->code ?? $this->createRawSlug();

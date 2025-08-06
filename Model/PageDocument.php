@@ -31,7 +31,7 @@ class PageDocument extends BasePageDocument
     /**
      * {@inheritDoc}
      */
-    public function preInsert(ConnectionInterface $con = null)
+    public function preInsert(ConnectionInterface $con = null): bool
     {
         $this->setPosition($this->getNextPosition());
 
@@ -40,7 +40,7 @@ class PageDocument extends BasePageDocument
         return true;
     }
 
-    public function preDelete(ConnectionInterface $con = null)
+    public function preDelete(ConnectionInterface $con = null): bool
     {
         parent::preDelete($con);
 

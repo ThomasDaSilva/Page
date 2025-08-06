@@ -9,6 +9,7 @@ use Page\Model\PageTagCombinationQuery;
 use Page\Model\PageTagQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\Join;
+use Propel\Runtime\ActiveQuery\ModelCriteria;
 use Thelia\Core\Template\Element\BaseI18nLoop;
 use Thelia\Core\Template\Element\LoopResult;
 use Thelia\Core\Template\Element\LoopResultRow;
@@ -94,7 +95,7 @@ class PageLoop extends BaseI18nLoop implements PropelSearchLoopInterface
     }
 
 
-    public function buildModelCriteria()
+    public function buildModelCriteria(): ModelCriteria
     {
         $visible = $this->getVisible();
 
