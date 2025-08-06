@@ -21,7 +21,7 @@ class Page extends BaseModule
     public const PAGE_DOCUMENT = 'page_document';
     public const PAGE_DOCUMENT_PREVIEW = 'page_document_preview';
 
-    public function getHooks()
+    public function getHooks(): array
     {
         return [
             [
