@@ -17,18 +17,14 @@ use Page\Model\PageI18nQuery;
 use Page\Model\PageQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Thelia\Service\Model\LangService;
-use TheliaBlocks\Service\JsonBlockService;
-use TheliaLibrary\Model\LibraryItemImageQuery;
-use TheliaLibrary\Service\LibraryImageService;
+use Thelia\Domain\Localization\Service\LangService;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
+
 
 class PageTwigExtension extends AbstractExtension
 {
     public function __construct(
-        private JsonBlockService $jsonBlockService,
-        private LibraryImageService $libraryImageService,
         protected RequestStack $requestStack,
         private LangService $localeService,
     ) {}
