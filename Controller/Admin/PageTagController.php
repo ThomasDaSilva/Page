@@ -7,7 +7,7 @@ use Page\Form\PageTagForm;
 use Page\Model\PageTag;
 use Page\Model\PageTagQuery;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Thelia\Controller\Admin\BaseAdminController;
 use Thelia\Core\HttpFoundation\Request;
 use Thelia\Core\HttpFoundation\Response;

@@ -4,7 +4,7 @@ namespace Page\Controller\Admin;
 
 use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Thelia\Controller\Admin\BaseAdminController;
 use Thelia\Core\HttpFoundation\Request;
 use Thelia\Core\HttpFoundation\Response;
@@ -23,7 +23,6 @@ use TheliaLibrary\Service\LibraryItemImageService;
  */
 
 /**
- * @Route("/admin/page/image", name="page_image")
  */
 class PageImageController extends BaseAdminController
 {
@@ -33,6 +32,7 @@ class PageImageController extends BaseAdminController
      * @param $pageId
      * @return string|Response
      */
+    #[Route('/admin/page/image', name: 'page_image')]
     public function getImageListAction($pageId): Response|string
     {
         return $this->render('includes/page-image-list', ["page_id" => $pageId]);
@@ -40,7 +40,6 @@ class PageImageController extends BaseAdminController
 
 
     /**
-     * @Route("/upload/{pageId}", name="_image_upload", methods="POST")
      *
      * @param Request $request
      * @param Session $session
@@ -48,6 +47,7 @@ class PageImageController extends BaseAdminController
      * @param $pageId
      * @return ResponseRest
      */
+    #[Route('/upload/{pageId}', name: '_image_upload', methods: ['POST'])]
     public function uploadImageAction(
         Request                 $request,
         Session                 $session,
@@ -90,7 +90,6 @@ class PageImageController extends BaseAdminController
     }
 
     /**
-     * @Route("/delete/{pageImageId}/{pageId}", name="_image_delete", methods="GET")
      *
      * @param LibraryItemImageService $libraryItemImageService
      * @param LibraryImageService $libraryImageService
@@ -98,6 +97,7 @@ class PageImageController extends BaseAdminController
      * @param $pageId
      * @return RedirectResponse|Response
      */
+    #[Route('/delete/{pageImageId}/{pageId}', name: '_image_delete', methods: ['GET'])]
     public function deleteImageAction(
         LibraryItemImageService $libraryItemImageService,
         LibraryImageService     $libraryImageService,

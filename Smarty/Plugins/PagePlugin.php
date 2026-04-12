@@ -15,7 +15,7 @@ class PagePlugin extends AbstractSmartyPlugin
     /**
      * {@inheritdoc}
      */
-    public function getPluginDescriptors()
+    public function getPluginDescriptors(): array
     {
         return [
             new SmartyPluginDescriptor('function', 'page', $this, 'pageDataAccess')

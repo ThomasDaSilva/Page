@@ -7,7 +7,7 @@ use Page\Page;
 use Page\Service\PageDocumentService;
 use Page\Service\PageService;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Thelia\Controller\Admin\BaseAdminController;
 use Thelia\Core\HttpFoundation\Request;
 use Thelia\Core\HttpFoundation\Response;
@@ -24,7 +24,6 @@ use TheliaLibrary\Service\LibraryItemImageService;
  */
 
 /**
- * @Route("/admin/page/document", name="page_document")
  */
 class PageDocumentController extends BaseAdminController
 {
@@ -34,13 +33,13 @@ class PageDocumentController extends BaseAdminController
      * @param $pageId
      * @return string|Response
      */
+    #[Route('/admin/page/document', name: 'page_document')]
     public function getDocumentListAction($pageId): Response|string
     {
         return $this->render('includes/page-document-list', ["page_id" => $pageId]);
     }
 
     /**
-     * @Route("/upload/{pageId}", name="_document_upload", methods="POST")
      *
      * @param Request $request
      * @param Session $session
@@ -49,6 +48,7 @@ class PageDocumentController extends BaseAdminController
      * @param $pageId
      * @return ResponseRest
      */
+    #[Route('/upload/{pageId}', name: '_document_upload', methods: ['POST'])]
     public function uploadDocumentAction(
         Request             $request,
         Session             $session,
@@ -78,7 +78,6 @@ class PageDocumentController extends BaseAdminController
     }
 
     /**
-     * @Route("/delete/{pageDocumentId}/{pageId}", name="_document_delete", methods="GET")
      *
      * @param Session $session
      * @param PageDocumentService $pageDocumentService
@@ -86,6 +85,7 @@ class PageDocumentController extends BaseAdminController
      * @param $pageId
      * @return RedirectResponse|Response
      */
+    #[Route('/delete/{pageDocumentId}/{pageId}', name: '_document_delete', methods: ['GET'])]
     public function deleteDocumentAction(
         Session                 $session,
         PageDocumentService     $pageDocumentService,
@@ -107,12 +107,12 @@ class PageDocumentController extends BaseAdminController
     }
 
     /**
-     * @Route("/update-position/{pageId}", name="_document_update_position", methods="POST")
      *
      * @param Request $request
      * @param PageDocumentService $pageDocumentService
      * @return void
      */
+    #[Route('/update-position/{pageId}', name: '_document_update_position', methods: ['POST'])]
     public function updatePositionDocumentAction(
         Request             $request,
         PageDocumentService $pageDocumentService

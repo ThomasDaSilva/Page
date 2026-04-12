@@ -15,7 +15,7 @@ namespace Page\Controller\Admin;
 use Page\Form\PageForm;
 use Page\Form\PageTypeForm;
 use Page\Service\PageTypeProvider;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Thelia\Controller\Admin\BaseAdminController;
 use Thelia\Core\Template\ParserContext;
 use Thelia\Form\Exception\FormValidationException;
@@ -28,21 +28,21 @@ use Thelia\Form\Exception\FormValidationException;
  */
 
 /**
- * @Route("/admin/page-type", name="page_type")
  */
 class PageTypeController extends BaseAdminController
 {
     /**
      * @Route("", name="_page_type_list", methods="GET")
      */
+    #[Route('/admin/page-type', name: 'page_type')]
     public function listPageTypeAction()
     {
         return $this->render('page-type');
     }
 
     /**
-     * @Route("/create", name="_create_page_type_list", methods="POST")
      */
+    #[Route('/create', name: '_create_page_type_list', methods: ['POST'])]
     public function createPageTypeAction(ParserContext $parserContext, PageTypeProvider $pageTypeProvider)
     {
         $form = $this->createForm(PageTypeForm::class);
@@ -70,10 +70,10 @@ class PageTypeController extends BaseAdminController
     }
 
     /**
-     * @Route("/update", name="_update_page_type_list", methods="POST")
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response|null
      */
+    #[Route('/update', name: '_update_page_type_list', methods: ['POST'])]
     public function updatePagesTypeAction(ParserContext $parserContext, PageTypeProvider $pageTypeProvider, int $pagesTypeId)
     {
         $form = $this->createForm(PageForm::class);
@@ -102,10 +102,10 @@ class PageTypeController extends BaseAdminController
     }
 
     /**
-     * @Route("/delete", name="_update_page_type_list", methods="GET")
      *
      * @return string|null
      */
+    #[Route('/delete', name: '_update_page_type_list', methods: ['GET'])]
     public function deletePagesTypeAction(PageTypeProvider $pageTypeProvider, $pagesTypeId)
     {
         try {

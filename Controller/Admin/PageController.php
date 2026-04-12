@@ -11,7 +11,7 @@ use Page\Service\PageProvider;
 use Page\Service\PageService;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Thelia\Controller\Admin\BaseAdminController;
 use Page\Form\PageForm;
 use Page\Model\PageQuery;
@@ -30,34 +30,34 @@ use Thelia\Tools\URL;
  */
 
 /**
- * @Route("/admin/page", name="page")
  */
 class PageController extends BaseAdminController
 {
     /**
      * @Route("", name="_list", methods="GET")
      */
+    #[Route('/admin/page', name: 'page')]
     public function listPageAction()
     {
         return $this->render('pages-list');
     }
 
     /**
-     * @Route("/new", name="_new_page", methods="GET")
      */
+    #[Route('/new', name: '_new_page', methods: ['GET'])]
     public function newPageViewAction(Request $request)
     {
         return $this->render('new-page', ['parent' => $request->get('parent')]);
     }
 
     /**
-     * @Route("/create", name="_create_page_action", methods="POST")
      *
      * @param Session $session
      * @param PageProvider $pageProvider
      * @param ParserContext $parserContext
      * @return RedirectResponse|Response|null
      */
+    #[Route('/create', name: '_create_page_action', methods: ['POST'])]
     public function createPageAction(Session $session, PageProvider $pageProvider, ParserContext $parserContext)
     {
         $form = $this->createForm(PageForm::class);
@@ -92,7 +92,6 @@ class PageController extends BaseAdminController
     }
 
     /**
-     * @Route("/edit/{pageId}", name="_edit_page", methods="GET")
      *
      * @param Request $request
      * @param Session $session
@@ -100,6 +99,7 @@ class PageController extends BaseAdminController
      * @param $pageId
      * @return string|RedirectResponse|Response|\Thelia\Core\HttpFoundation\Response
      */
+    #[Route('/edit/{pageId}', name: '_edit_page', methods: ['GET'])]
     public function editPageViewAction(Request $request, Session $session, PageService $pageService, $pageId)
     {
         try {
@@ -164,8 +164,8 @@ class PageController extends BaseAdminController
     }
 
     /**
-     * @Route("/update/{pageId}", name="_update_page_action", methods="POST")
      */
+    #[Route('/update/{pageId}', name: '_update_page_action', methods: ['POST'])]
     public function updatePageAction(Request $request, Session $session, PageProvider $pageProvider, ParserContext $parserContext, int $pageId)
     {
         $form = $this->createForm(EditPageForm::class);
@@ -208,8 +208,8 @@ class PageController extends BaseAdminController
     }
 
     /**
-     * @Route("/update/{pageId}/seo", name="_update_seo_page_action", methods="POST")
      */
+    #[Route('/update/{pageId}/seo', name: '_update_seo_page_action', methods: ['POST'])]
     public function updateSeoPageAction(Request $request, Session $session, PageProvider $pageProvider, ParserContext $parserContext, int $pageId)
     {
         $form = $this->createForm(EditPageSeoForm::class);
@@ -250,8 +250,8 @@ class PageController extends BaseAdminController
     }
 
     /**
-     * @Route("/update-position", name="_update_page_position_action", methods="GET")
      */
+    #[Route('/update-position', name: '_update_page_position_action', methods: ['GET'])]
     public function updatePagePosition(
         Request     $request,
         PageService $pageService
@@ -281,8 +281,8 @@ class PageController extends BaseAdminController
     }
 
     /**
-     * @Route("/set-visible", name="_toggle_page_visibility_action", methods="GET")
      */
+    #[Route('/set-visible', name: '_toggle_page_visibility_action', methods: ['GET'])]
     public function togglePageVisibility(
         Request     $request
     ) {
@@ -317,8 +317,8 @@ class PageController extends BaseAdminController
     }
 
     /**
-     * @Route("/set-home", name="_toggle_page_home_action", methods="GET")
      */
+    #[Route('/set-home', name: '_toggle_page_home_action', methods: ['GET'])]
     public function toggleHome(
         Request     $request
     ) {
@@ -363,10 +363,10 @@ class PageController extends BaseAdminController
     }
 
     /**
-     * @Route("/delete/{pageId}", name="_delete_page_action", methods="GET")
      * @param $pageId
      * @return RedirectResponse|Response
      */
+    #[Route('/delete/{pageId}', name: '_delete_page_action', methods: ['GET'])]
     public function deletePageAction($pageId)
     {
         try {
